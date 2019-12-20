@@ -1,5 +1,7 @@
-var fs = require('fs');
-fs.writeFile('newfile3.txt', 'Hi!',  (err) => {
-  if (err) throw err;
-  console.log('Saved!');
+const http = require("http");
+const fs = require("fs");
+
+fs.appendFile("details.txt", "Qualification:B.tech", function(err){
+if(err) throws(err);
+console.log("Updated");
 });
