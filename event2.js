@@ -1,13 +1,30 @@
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
-//Create an event handler:
-var myEventHandler = function () {
-  console.log('I am Sreeram!');
+var listner1 = function listner1() {
+   console.log('listner1 executed.');
 }
 
-//Assign the event handler to an event:
-eventEmitter.on('scream', myEventHandler);
+var listner2 = function listner2() {
+   console.log('listner2 executed.');
+}
 
-//Fire the 'scream' event:
-eventEmitter.emit('scream');
+eventEmitter.addListener('connection', listner1);
+
+eventEmitter.on('connection', listner2);
+
+var eventListeners = require('events').EventEmitter.listenerCount
+   (eventEmitter,'connection');
+console.log(eventListeners + " Listner(s) listening to connection event");
+
+eventEmitter.emit('connection');
+
+eventEmitter.removeListener('connection', listner1);
+console.log("Listner1 will not listen now.");
+ 
+eventEmitter.emit('connection');
+
+eventListeners = require('events').EventEmitter.listenerCount(eventEmitter,'connection');
+console.log(eventListeners + " Listner(s) listening to connection event");
+
+console.log("Program Ended.");
